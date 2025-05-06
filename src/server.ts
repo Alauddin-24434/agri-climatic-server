@@ -10,7 +10,7 @@ async function server() {
 }
 
 server().catch((err) => {
-    console.error("Error starting server:", err);
+    console.error(`Error starting server:`, err);
     process.exit(1);
 });
 // Compare this snippet from src/app/config/env.ts:
