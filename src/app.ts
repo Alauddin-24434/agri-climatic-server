@@ -1,17 +1,27 @@
+import cors from "cors";
 import express, { Application, NextFunction, Request } from "express";
 import status from "http-status";
 import { weatherRoute } from "./app/modules/weather/weather.route";
+import { authRoute } from "./app/modules/auth/auth.route";
 
 const app: Application = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+   origin: ["http://localhost:3000"], 
+   credentials: true, 
+}));
+
+
+
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
 app.use('/api/v1', weatherRoute);
+app.use('/api/v1', authRoute);
 
 // not found route handler
 app.use((req: Request, res: express.Response) => {
